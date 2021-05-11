@@ -1,3 +1,6 @@
 May 10, 2021
 ============
 Hacked this script to parse the lensfun database to generate a csv for the wacv lens distortion paper
+
+run command:
+`python get_cam_lensfun.py -g -m -o output /usr/local/share/lensfun/`
