@@ -48,6 +48,7 @@ class Lens:
     def __init__(self, element, root, camtype):
         self.maker = find_best(element, "maker")
         self.model = find_best(element, "model")
+        self.type = find_best(element, "type")
         if camtype == "compact":
             mount = element.find("mount").text
             for camera in root.findall("camera"):
@@ -73,7 +74,7 @@ class Lens:
         self.tca = element.find("calibration/tca") is not None
         self.vignetting = element.find("calibration/vignetting") is not None
     def __lt__(self, other):
-        return (self.maker, self.model, self.crop) < (other.maker, other.model, self.crop)
+        return (self.maker, self.model, self.crop, self.type) < (other.maker, other.model, self.crop, self.type)
 
 #======================================================================
 
@@ -173,6 +174,7 @@ else:
             for d in lens.all_distortions:
                 dlens_stats=dict(
                     {'lens_make':lens.maker,'lens_model':lens.model,
+                    'lens_type': lens.type,
                     'lens_crop_factor': lens.crop,
                     'lens_dist_model':d[0],
                     'lens_dist_focal': d[1],
